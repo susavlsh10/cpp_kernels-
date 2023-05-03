@@ -5,13 +5,13 @@ NVCC = nvcc
 #NVCCFLAGS = -arch=sm_30
 
 # Source files
-SRCS = matmul.cu matrix_cpu.cu
+SRCS = matmul.cu matrix_cpu.cu matrix_gpu.cu
 
 # Object files
-OBJS = matmul.o matrix_cpu.o
+OBJS = matmul.o matrix_cpu.o matrix_gpu.o
 
 # Header files
-INCS = matrix_cpu.h
+INCS = matrix_cpu.h matrix_gpu.h
 
 # Executable file name
 EXE = MatMul.exe
@@ -26,6 +26,10 @@ matmul.o: matmul.cu $(INCS)
 
 matrix_cpu.o: matrix_cpu.cu $(INCS)
 	$(NVCC) $(NVCCFLAGS) -c matrix_cpu.cu
+
+matrix_gpu.o: matrix_gpu.cu $(INCS)
+	$(NVCC) $(NVCCFLAGS) -c matrix_gpu.cu
+
 
 clean:
 	rm -f $(EXE) $(OBJS)
